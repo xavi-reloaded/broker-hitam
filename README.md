@@ -1,4 +1,4 @@
-androidxtrem-sites
+Broker Intelligence Tamarit-Hidalgo
 ==================
 
-androidxtrem-sites
+This app aims to set automated buy-shell orders given a concrete market.

@@ -28,7 +28,9 @@ public class StockHelper {
     }
 
     public static DoubleArrayList getValueDoubleArrayList() throws IOException {
-        InputStream ibexFile = StockHelper.class.getResourceAsStream("/ibex.csv");
+        String stockFile = StockConstants.getFileName(StockMarkets.IBEX);
+
+        InputStream ibexFile = StockHelper.class.getResourceAsStream("/" + stockFile);
         String[] ibexRows = FileHelper.fileToString(ibexFile).split("\n");
 
         DoubleArrayList ibexValuesLists = new DoubleArrayList(1);
