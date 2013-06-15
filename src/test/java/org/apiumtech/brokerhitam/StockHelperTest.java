@@ -58,7 +58,7 @@ public class StockHelperTest {
     @Test
     public void test_getStockDataHashMap() throws Exception
     {
-        HashMap<Date,Double> actual  = StockHelper.getStockDataHashMap(StockConstants.BBVA);
+        HashMap<Date,Double> actual  = StockHelper.getStockDataHashMapByDay(StockConstants.BBVA);
         int expected = 4905;
         Assert.assertEquals(actual.size(),expected);
     }
@@ -83,10 +83,11 @@ public class StockHelperTest {
     {
         Date iniDate = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH).parse("12/05/2006");
         Date endDate = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH).parse("12/06/2006");
-        HashMap<Date,Double> hashMap = StockHelper.getStockDataHashMap(StockConstants.BBVA);
+        HashMap<Date,Double> hashMap = StockHelper.getStockDataHashMapByDay(StockConstants.BBVA);
 
         DoubleArrayList actual = StockHelper.getStockArrayByDateRange(hashMap,iniDate,endDate);
         int expected = 20;
         Assert.assertEquals(actual.size(),expected);
     }
+
 }

@@ -45,7 +45,7 @@ public class StockHelper {
         return ibexValuesLists;
     }
 
-    public static HashMap<Date,Double> getStockDataHashMap(String stock) throws IOException, ParseException {
+    public static HashMap<Date,Double> getStockDataHashMapByDay(String stock) throws IOException, ParseException {
         String stockFile = StockConstants.getFileName(stock);
         InputStream file = StockHelper.class.getResourceAsStream("/" + stockFile);
         String[] rows = FileHelper.fileToString(file).split("\n");
