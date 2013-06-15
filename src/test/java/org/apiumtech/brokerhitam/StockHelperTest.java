@@ -2,12 +2,12 @@ package org.apiumtech.brokerhitam;
 
 import cern.colt.list.DoubleArrayList;
 import com.androidxtrem.commonsHelpers.FileHelper;
-import org.apiumtech.brokerhitam.CorrelationsTools;
-import org.apiumtech.brokerhitam.StockHelper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.InputStream;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +22,7 @@ public class StockHelperTest {
     public void test_Name() throws Exception {
         InputStream ibexFile = CorrelationsTools.class.getResourceAsStream("/ibex.csv");
         String[] we = FileHelper.fileToString(ibexFile).split("\n");
-        Assert.assertEquals(we.length,4483);
+        Assert.assertEquals(we.length,4482);
     }
 
     @Test
@@ -51,9 +51,29 @@ public class StockHelperTest {
         String stocklist = data.partFromTo(1, 10).toString();
         String expectedStoclList = "[8216.7, 8290.7, 8363.0, 8284.4, 8320.6, 8433.5, 8441.7, 8511.3, 8363.6, 8264.6]";
         Assert.assertEquals(stocklist,expectedStoclList);
-
-
     }
 
+    @Test
+    public void test_getStockDataHashMap() throws Exception
+    {
+        HashMap<Date,Double> actual  = StockHelper.getStockDataHashMap(StockConstants.BBVA);
+        int expected = 4905;
+        Assert.assertEquals(actual.size(),expected);
+    }
+
+    @Test
+    public void test_extractDateFromString_badInputString_() throws Exception
+    {
+        Date actual = StockHelper.extractDateFromString("00:00");
+        Assert.assertNull(actual);
+    }
+
+    @Test
+    public void test_extractDateFromString_string1352013_validDate() throws Exception
+    {
+        Date actual = StockHelper.extractDateFromString("13/5/2013");
+        String expected = "Mon May 13 00:00:00 CEST 2013";
+        Assert.assertEquals(actual.toString(),expected);
+    }
 
 }

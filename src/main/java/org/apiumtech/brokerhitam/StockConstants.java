@@ -8,6 +8,8 @@ package org.apiumtech.brokerhitam;
  * To change this template use File | Settings | File Templates.
  */
 public class StockConstants {
+    public static final String BBVA = "bbva";
+
     public static String getFileName(String stock) {
         return stock.concat(".csv");
     }

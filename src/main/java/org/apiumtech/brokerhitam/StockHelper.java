@@ -5,6 +5,11 @@ import com.androidxtrem.commonsHelpers.FileHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,9 +40,31 @@ public class StockHelper {
 
         DoubleArrayList ibexValuesLists = new DoubleArrayList(1);
         for (String str : ibexRows ) {
-            if (str.equals("Fecha,Último,Apert.,%Dif.,Máx.,Mín.,Volumen")) continue;
             ibexValuesLists.add( getValue(str) );
         }
         return ibexValuesLists;
+    }
+
+    public static HashMap<Date,Double> getStockDataHashMap(String stock) throws IOException, ParseException {
+        String stockFile = StockConstants.getFileName(stock);
+        InputStream file = StockHelper.class.getResourceAsStream("/" + stockFile);
+        String[] rows = FileHelper.fileToString(file).split("\n");
+        HashMap<Date,Double> stockHashMap = new HashMap<Date,Double>();
+
+        for (String str : rows ) {
+            Date date = extractDateFromString( getDate(str) );
+            Double value = getValue(str);
+
+            if (date != null) {
+                stockHashMap.put(date, value);
+            }
+        }
+        return stockHashMap;
+    }
+
+    public static Date extractDateFromString(String str) throws ParseException
+    {
+        if (str.equals("00:00")) return null;
+        return new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH).parse(str);
     }
 }
