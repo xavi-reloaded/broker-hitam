@@ -67,4 +67,20 @@ public class StockHelper {
         if (str.equals("00:00")) return null;
         return new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH).parse(str);
     }
+
+    public static DoubleArrayList getStockArrayByDateRange(HashMap<Date,Double> hashMap, Date iniDate, Date endDate) {
+        DoubleArrayList valueList = new DoubleArrayList();
+
+        for (Date key : hashMap.keySet())
+        {
+            //              key is after iniDate
+            //              key is before endDate
+            if ((key.compareTo(iniDate) > 0) && (key.compareTo(endDate)<0))
+            {
+                valueList.add(hashMap.get(key));
+            }
+        }
+
+        return valueList;
+    }
 }

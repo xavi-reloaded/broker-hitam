@@ -6,8 +6,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
@@ -76,4 +78,15 @@ public class StockHelperTest {
         Assert.assertEquals(actual.toString(),expected);
     }
 
+    @Test
+    public void test_getStockArrayByDateRange_oneMonthRange_getRangeNoWeekends() throws Exception
+    {
+        Date iniDate = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH).parse("12/05/2006");
+        Date endDate = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH).parse("12/06/2006");
+        HashMap<Date,Double> hashMap = StockHelper.getStockDataHashMap(StockConstants.BBVA);
+
+        DoubleArrayList actual = StockHelper.getStockArrayByDateRange(hashMap,iniDate,endDate);
+        int expected = 20;
+        Assert.assertEquals(actual.size(),expected);
+    }
 }
