@@ -83,4 +83,8 @@ public class StockHelper {
 
         return valueList;
     }
+
+    public static boolean isMaximumStockInDate(Date date) {
+        return false;
+    }
 }

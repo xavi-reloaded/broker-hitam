@@ -90,4 +90,11 @@ public class StockHelperTest {
         Assert.assertEquals(actual.size(),expected);
     }
 
+    @Test
+    public void test_isMaximumFromInDate() throws Exception {
+        boolean actual = StockHelper.isMaximumStockInDate(new Date());
+        boolean expected = true;
+        Assert.assertEquals(actual,expected);
+
+    }
 }
