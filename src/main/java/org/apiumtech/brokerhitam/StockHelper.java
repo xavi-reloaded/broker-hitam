@@ -84,7 +84,8 @@ public class StockHelper {
         return valueList;
     }
 
-    public static boolean isMaximumStockInDate(Date date) {
+    public static boolean isMaximumStockInDate(String stock,Date date) throws IOException, ParseException {
+        HashMap<Date,Double> stockDataHashMapByDay =  getStockDataHashMapByDay(stock);
         return false;
     }
 }
